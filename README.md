@@ -1,4 +1,4 @@
-# Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter
+# Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter: An ultra-accurate closed-form formula
 
 ## Abstract
 
@@ -28,7 +28,7 @@ $$
 
 ---
 
-## 2. First Improvement: Simple 2EXP (no powers)
+## 2. First Improvement: Simple R2/2EXP (no powers)
 
 $$
 P \approx \frac{P_{R2}}{1 - \left(A e^{-B(1-h)} + C e^{-D(1-h)}\right)}
@@ -37,7 +37,7 @@ $$
 Constraint:
 
 $$
-A + C = S
+A + C = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
 $$
 
 ### Constants
@@ -53,7 +53,7 @@ $$
 
 ---
 
-## 3. Flexible 2EXP Model (with powers)
+## 3. Flexible (with powers) R2/F2EXP Model 
 
 $$
 P \approx \frac{P_{R2}}{
@@ -61,6 +61,10 @@ P \approx \frac{P_{R2}}{
 A e^{-B(1-h)^q} + C e^{-D(1-h)^r}
 \right)
 }
+$$
+
+$$
+A + C = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
 $$
 
 ### Constants
@@ -78,13 +82,17 @@ $$
 
 ---
 
-## 4. Three-Exponential Model (3EXP)
+## 4. Flexible (with powers) Three-Exponential Model (R2/F3EXP)
 
 $$
 P \approx \frac{P_{R2}}{
 1 - \left(
 Ae^{-B(1-h)^q}+Ce^{-D(1-h)^r}+ Ee^{-F(1-h)^s}
   \right)}
+$$
+
+$$
+A + C + E = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
 $$
 
 ### Constants
@@ -105,7 +113,7 @@ $$
 
 ---
 
-## 5. Four-Exponential Model (4EXP)
+## 5. Flexible (with powers) Four-Exponential Model (R2/F4EXP)
 
 $$
 P \approx \frac{P_{R2}}{
@@ -113,6 +121,10 @@ P \approx \frac{P_{R2}}{
 A e^{-B(1-h)^q} + C e^{-D(1-h)^r} + E e^{-F(1-h)^s} + G e^{-H(1-h)^u}
   \right)
   }
+$$
+
+$$
+A + C + E + G = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
 $$
 
 ### Constants
@@ -136,7 +148,7 @@ $$
 
 ---
 
-## 6. Five-Exponential Model (5EXP)
+## 6. Flexible (with powers) Five-Exponential Model (R2/F5EXP)
 
 $$
 P \approx \frac{P_{R2}}{
@@ -144,6 +156,10 @@ P \approx \frac{P_{R2}}{
 Ae^{-B(1-h)^q} + Ce^{-D(1-h)^r} + Ee^{-F(1-h)^s} + Ge^{-H(1-h)^u} + Ie^{-J(1-h)^v}
   \right)
 }
+$$
+
+$$
+A + C + E + G + I = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
 $$
 
 ### Constants
@@ -175,11 +191,11 @@ $$
 | Model              | Max Error (ppm) |
 | ------------------ | --------------- |
 | Ramanujan II       | 402.34          |
-| 2EXP simple        | 0.57            |
-| 2EXP (with powers) | 0.20            |
-| 3EXP               | 0.055           |
-| 4EXP               | 0.03            |
-| 5EXP               | 0.0216          |
+| R2/2EXP simple     | 0.57            |
+| R2/F2EXP           | 0.20            |
+| R2/F3EXP           | 0.055           |
+| R3/F4EXP           | 0.03            |
+| R4/F5EXP           | 0.0216          |
 
 ---
 
