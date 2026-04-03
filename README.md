@@ -37,7 +37,7 @@ $$
 Constraint:
 
 $$
-A + C = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
+A + C = S = 4.0233749415669598e-04 \approx 1 - \frac{7 \pi}{22}
 $$
 
 ### Constants
