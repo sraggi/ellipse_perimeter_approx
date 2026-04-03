@@ -64,7 +64,7 @@ A e^{-B(1-h)^q} + C e^{-D(1-h)^r}
 $$
 
 $$
-A + C = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
+A + C = S = 4.0233749415669598e-04 \approx 1 - \frac{7 \pi}{22}
 $$
 
 ### Constants
@@ -92,7 +92,7 @@ Ae^{-B(1-h)^q}+Ce^{-D(1-h)^r}+ Ee^{-F(1-h)^s}
 $$
 
 $$
-A + C + E = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
+A + C + E = S = 4.0233749415669598e-04 \approx 1 - \frac{7 \pi}{22}
 $$
 
 ### Constants
@@ -124,7 +124,7 @@ A e^{-B(1-h)^q} + C e^{-D(1-h)^r} + E e^{-F(1-h)^s} + G e^{-H(1-h)^u}
 $$
 
 $$
-A + C + E + G = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
+A + C + E + G = S = 4.0233749415669598e-04 \approx 1 - \frac{7 \pi}{22}
 $$
 
 ### Constants
@@ -159,7 +159,7 @@ Ae^{-B(1-h)^q} + Ce^{-D(1-h)^r} + Ee^{-F(1-h)^s} + Ge^{-H(1-h)^u} + Ie^{-J(1-h)^
 $$
 
 $$
-A + C + E + G + I = S = 4.0233749415669598e-04 \approx \frac{7 \pi}{22}
+A + C + E + G + I = S = 4.0233749415669598e-04 \approx 1 - \frac{7 \pi}{22}
 $$
 
 ### Constants
