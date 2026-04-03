@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Investigaciones - Perímetro de la Elipse</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 2rem; color: #333; }
+        code { background: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
+        pre { background: #f4f4f4; padding: 1rem; overflow-x: auto; }
+        img { max-width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="content">Cargando contenido...</div>
+
+    <script>
+        // 3. Función para leer el README.md de tu propio repositorio
+        async function loadReadme() {
+            try {
+                const response = await fetch('README.md');
+                const text = await response.text();
+                
+                // Convertimos el Markdown a HTML
+                document.getElementById('content').innerHTML = marked.parse(text);
+                
+                // Le decimos a MathJax que procese las nuevas fórmulas cargadas
+                if (window.MathJax) {
+                    MathJax.typeset();
+                }
+            } catch (error) {
+                document.getElementById('content').innerHTML = "Error al cargar el README.";
+            }
+        }
+
+        loadReadme();
+    </script>
+</body>
+</html>
