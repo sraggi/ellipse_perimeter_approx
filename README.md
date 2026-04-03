@@ -1,4 +1,4 @@
-# Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter: An ultra-accurate closed-form formula
+# Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter: ultra-accurate closed-form formulae
 
 ## Abstract
 
