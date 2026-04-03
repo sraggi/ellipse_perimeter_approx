@@ -1,5 +1,7 @@
 # Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter: ultra-accurate closed-form formulae
 
+Authors:  Salvador E. Ayala-Raggi and Manuel Rendón-Marín
+
 ## Abstract
 
 We investigate exponential corrections to Ramanujan's second formula for the perimeter of an ellipse. By introducing flexible exponents and increasing the number of exponential terms, we obtain a sequence of increasingly accurate approximations. Numerical evidence suggests that the correction admits a structured expansion consisting of a stable low-rate core and a rapidly convergent corrective tail.
