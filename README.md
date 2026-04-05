@@ -8,7 +8,7 @@ Ayala-Raggi, S.E., Rendón-Marín, M. (2026)
 
 **Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter: Ultra-Accurate Closed-Form Approximations**
 
-🔗 https://zenodo.org/records/19421411
+🔗 https://doi.org/10.5281/zenodo.19421410
 
 ## Abstract
 
