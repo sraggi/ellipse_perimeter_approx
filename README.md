@@ -5,6 +5,7 @@ Authors:  Salvador E. Ayala-Raggi and Manuel Rendón-Marín
 This repository contains the code and extended data for the paper:
 
 **Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter: Ultra-Accurate Closed-Form Approximations**
+
 Ayala-Raggi, S.E., Rendón-Marín, M. (2026)
 
 **Full Document in ResearchGate:** [Link here](https://www.researchgate.net/publication/403504375_Exponential_Corrections_to_Ramanujan's_Second_Formula_for_the_Ellipse_Perimeter_A_set_of_ultra-accurate_closed-form_formulas)
