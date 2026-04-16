@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ellipse Perimeter Demo (R2/F3EXP)</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1150px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.5;
+      color: #222;
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 0.4em;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      min-width: 170px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 12px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #0b5ed7;
+      color: white;
+      margin-right: 8px;
+      margin-top: 8px;
+    }
+
+    button:hover {
+      background: #094db1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f5f5f5;
+    }
+
+    .mono {
+      font-family: Consolas, Monaco, monospace;
+      word-break: break-word;
+    }
+
+    .formula {
+      background: #fafafa;
+      padding: 12px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 1.05rem;
+    }
+
+    .note {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: white;
+    }
+
+    .section-title {
+      margin-top: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Ellipse Perimeter Interactive Demo</h1>
+
+<p>
+This demo compares the proposed <strong>R2/F3EXP model</strong> against the
+numerical reference obtained via the complete elliptic integral of the second kind.
+</p>
+
+<div class="card">
+  <h2>Model</h2>
+
+  <div class="formula mono">
+    P ≈ P_R2 / (1 − [A·exp(-B(1-h)^q) + C·exp(-D(1-h)^r) + E·exp(-F(1-h)^s)])
+  </div>
+
+  <p class="note">
+    where h = ((a − b)/(a + b))² and P_R2 is Ramanujan’s second approximation.
+  </p>
+</div>
+
+<div class="card">
+  <h2>Single Evaluation</h2>
+
+  <div class="row">
+    <div class="field">
+      <label for="a">a (semi-axis)</label>
+      <input type="number" id="a" value="5" step="any" min="0.0000001">
+    </div>
+
+    <div class="field">
+      <label for="b_single">b (semi-axis)</label>
+      <input type="number" id="b_single" value="3" step="any" min="0.0000001">
+    </div>
+  </div>
+
+  <button onclick="compute()">Compute</button>
+
+  <table>
+    <tr><th>Quantity</th><th>Value</th></tr>
+    <tr><td>h</td><td id="h"></td></tr>
+    <tr><td>Ramanujan II</td><td id="pr2"></td></tr>
+    <tr><td>R2/F3EXP</td><td id="papprox"></td></tr>
+    <tr><td>Elliptic integral (reference)</td><td id="pexact"></td></tr>
+    <tr><td>Absolute error</td><td id="eabs"></td></tr>
+    <tr><td>Relative error</td><td id="erel"></td></tr>
+    <tr><td>Relative error (ppm)</td><td id="ppm"></td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Model Testing</h2>
+
+  <h3 class="section-title">Benchmark Mode</h3>
+  <p class="note">
+    Fixed benchmark used for validation: <span class="mono">b = 1</span>,
+    <span class="mono">a ∈ [1, 100]</span>.
+  </p>
+  <button onclick="runBenchmarkMode()">Run Benchmark Mode</button>
+
+  <hr style="margin: 24px 0; border: none; border-top: 1px solid #ddd;">
+
+  <h3 class="section-title">Custom Test Mode</h3>
+  <p class="note">
+    Configure <span class="mono">b</span>, <span class="mono">a_min</span>, and
+    <span class="mono">a_max</span>. The plot shows relative error in ppm
+    versus h on a logarithmic y-axis.
+  </p>
+
+  <div class="row">
+    <div class="field">
+      <label for="b_test">b</label>
+      <input type="number" id="b_test" value="1" step="any" min="0.0000001">
+    </div>
+
+    <div class="field">
+      <label for="a_min">a_min</label>
+      <input type="number" id="a_min" value="1" step="any" min="0.0000001">
+    </div>
+
+    <div class="field">
+      <label for="a_max">a_max</label>
+      <input type="number" id="a_max" value="100" step="any" min="0.0000001">
+    </div>
+
+    <div class="field">
+      <label for="n_points">samples</label>
+      <input type="number" id="n_points" value="500" step="1" min="10">
+    </div>
+  </div>
+
+  <button onclick="runCustomMode()">Run Custom Test</button>
+
+  <table>
+    <tr><th>Quantity</th><th>Value</th></tr>
+    <tr><td>Mode</td><td id="test_mode"></td></tr>
+    <tr><td>b</td><td id="test_b"></td></tr>
+    <tr><td>a range</td><td id="test_range"></td></tr>
+    <tr><td>Number of samples</td><td id="test_n"></td></tr>
+    <tr><td>Maximum relative error (model)</td><td id="test_max_erel"></td></tr>
+    <tr><td>Maximum relative error (model, ppm)</td><td id="test_max_ppm"></td></tr>
+    <tr><td>a at maximum error</td><td id="test_a_at_max"></td></tr>
+    <tr><td>h at maximum error</td><td id="test_h_at_max"></td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Error Plot</h2>
+  <p class="note">
+    Relative error in ppm versus h. The y-axis is logarithmic.
+    Blue: proposed R2/F3EXP model. Red: Ramanujan II.
+  </p>
+  <canvas id="plot" width="1120" height="560"></canvas>
+</div>
+
+<div class="card">
+  <h2>Constants (compact set)</h2>
+
+  <div class="mono">
+    A = 3.27047e-04<br>
+    C = 3.5336e-05<br>
+    E = 3.99547e-05<br>
+    B = 12.8911<br>
+    D = 42.8<br>
+    F = 11.431<br>
+    q = 0.99548<br>
+    r = 0.95254<br>
+    s = 1.70283
+  </div>
+</div>
+
+<script>
+const A = 3.27047e-04;
+const C = 3.5336e-05;
+const E = 3.99547e-05;
+const B = 12.8911;
+const D = 42.8;
+const F = 11.431;
+const q = 0.99548;
+const r = 0.95254;
+const s = 1.70283;
+
+function simpson(f, a, b, n = 6000) {
+  if (n % 2 !== 0) n++;
+  const h = (b - a) / n;
+  let sum = f(a) + f(b);
+
+  for (let i = 1; i < n; i++) {
+    const x = a + i * h;
+    sum += (i % 2 === 0 ? 2 : 4) * f(x);
+  }
+
+  return (h / 3) * sum;
+}
+
+function ellipticE(m) {
+  return simpson(theta => Math.sqrt(1 - m * Math.sin(theta) ** 2), 0, Math.PI / 2, 6000);
+}
+
+function exactPerimeter(a, b) {
+  const aa = Math.max(a, b);
+  const bb = Math.min(a, b);
+  const m = 1 - (bb * bb) / (aa * aa);
+  return 4 * aa * ellipticE(m);
+}
+
+function R2(a, b) {
+  const h = ((a - b) / (a + b)) ** 2;
+  return Math.PI * (a + b) * (1 + (3 * h) / (10 + Math.sqrt(4 - 3 * h)));
+}
+
+function R2F3EXP(a, b) {
+  const h = ((a - b) / (a + b)) ** 2;
+  const pr2 = R2(a, b);
+
+  const corr =
+    A * Math.exp(-B * (1 - h) ** q) +
+    C * Math.exp(-D * (1 - h) ** r) +
+    E * Math.exp(-F * (1 - h) ** s);
+
+  return pr2 / (1 - corr);
+}
+
+function fmt(x) {
+  return Number.isFinite(x) ? x.toPrecision(16) : "NaN";
+}
+
+function fmtExp(x) {
+  return Number.isFinite(x) ? x.toExponential(10) : "NaN";
+}
+
+function compute() {
+  const a = parseFloat(document.getElementById("a").value);
+  const b = parseFloat(document.getElementById("b_single").value);
+
+  if (!(a > 0 && b > 0)) {
+    alert("Please enter positive values for a and b.");
+    return;
+  }
+
+  const h = ((a - b) / (a + b)) ** 2;
+  const pr2 = R2(a, b);
+  const papprox = R2F3EXP(a, b);
+  const pexact = exactPerimeter(a, b);
+  const eabs = Math.abs(papprox - pexact);
+  const erel = eabs / pexact;
+
+  document.getElementById("h").innerText = fmtExp(h);
+  document.getElementById("pr2").innerText = fmt(pr2);
+  document.getElementById("papprox").innerText = fmt(papprox);
+  document.getElementById("pexact").innerText = fmt(pexact);
+  document.getElementById("eabs").innerText = fmtExp(eabs);
+  document.getElementById("erel").innerText = fmtExp(erel);
+  document.getElementById("ppm").innerText = (erel * 1e6).toFixed(6) + " ppm";
+}
+
+function runTest(modeName, b, aMin, aMax, n) {
+  if (!(b > 0 && aMin > 0 && aMax > 0)) {
+    alert("b, a_min, and a_max must be positive.");
+    return;
+  }
+
+  if (!(aMax >= aMin)) {
+    alert("a_max must be greater than or equal to a_min.");
+    return;
+  }
+
+  if (!(n >= 10)) {
+    alert("The number of samples must be at least 10.");
+    return;
+  }
+
+  const data = [];
+  let maxErrModel = -1;
+  let aAtMax = NaN;
+  let hAtMax = NaN;
+
+  for (let i = 0; i < n; i++) {
+    const a = aMin + (aMax - aMin) * i / (n - 1);
+    const h = ((a - b) / (a + b)) ** 2;
+
+    const pModel = R2F3EXP(a, b);
+    const pR2 = R2(a, b);
+    const pExact = exactPerimeter(a, b);
+
+    const errModel = Math.abs(pModel - pExact) / pExact;
+    const errR2 = Math.abs(pR2 - pExact) / pExact;
+
+    data.push({
+      a: a,
+      h: h,
+      model: errModel * 1e6,
+      r2: errR2 * 1e6
+    });
+
+    if (errModel > maxErrModel) {
+      maxErrModel = errModel;
+      aAtMax = a;
+      hAtMax = h;
+    }
+  }
+
+  document.getElementById("test_mode").innerText = modeName;
+  document.getElementById("test_b").innerText = fmt(b);
+  document.getElementById("test_range").innerText = "[" + fmt(aMin) + ", " + fmt(aMax) + "]";
+  document.getElementById("test_n").innerText = n.toString();
+  document.getElementById("test_max_erel").innerText = fmtExp(maxErrModel);
+  document.getElementById("test_max_ppm").innerText = (maxErrModel * 1e6).toFixed(6) + " ppm";
+  document.getElementById("test_a_at_max").innerText = fmt(aAtMax);
+  document.getElementById("test_h_at_max").innerText = fmtExp(hAtMax);
+
+  drawPlot(data, modeName);
+}
+
+function runBenchmarkMode() {
+  runTest("Benchmark Mode", 1.0, 1.0, 100.0, 500);
+}
+
+function runCustomMode() {
+  const b = parseFloat(document.getElementById("b_test").value);
+  const aMin = parseFloat(document.getElementById("a_min").value);
+  const aMax = parseFloat(document.getElementById("a_max").value);
+  const n = parseInt(document.getElementById("n_points").value, 10);
+
+  runTest("Custom Test Mode", b, aMin, aMax, n);
+}
+
+function drawPlot(data, modeName) {
+  const canvas = document.getElementById("plot");
+  const ctx = canvas.getContext("2d");
+
+  const W = canvas.width;
+  const H = canvas.height;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const left = 150;
+  const right = 30;
+  const top = 30;
+  const bottom = 95;
+
+  const plotW = W - left - right;
+  const plotH = H - top - bottom;
+
+  const xMin = 0;
+  const xMax = Math.max(...data.map(d => d.h));
+
+  const allY = data.flatMap(d => [d.model, d.r2]).filter(v => v > 0);
+
+  if (allY.length === 0) {
+    return;
+  }
+
+  const yMin = Math.pow(10, Math.floor(Math.log10(Math.min(...allY))));
+  const yMax = Math.pow(10, Math.ceil(Math.log10(Math.max(...allY))));
+
+  function xMap(x) {
+    if (xMax === xMin) return left + plotW / 2;
+    return left + (x - xMin) / (xMax - xMin) * plotW;
+  }
+
+  function yMap(y) {
+    const ly = Math.log10(y);
+    const lyMin = Math.log10(yMin);
+    const lyMax = Math.log10(yMax);
+    return top + plotH - (ly - lyMin) / (lyMax - lyMin) * plotH;
+  }
+
+  ctx.strokeStyle = "#000";
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(left, top);
+  ctx.lineTo(left, top + plotH);
+  ctx.lineTo(left + plotW, top + plotH);
+  ctx.stroke();
+
+  ctx.font = "22px Arial";
+  ctx.fillStyle = "#000";
+
+  const xTicks = 5;
+  for (let i = 0; i <= xTicks; i++) {
+    const xVal = xMin + (xMax - xMin) * i / xTicks;
+    const x = xMap(xVal);
+    const y = top + plotH;
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x, y + 8);
+    ctx.stroke();
+
+    ctx.fillText(xVal.toFixed(2), x - 18, y + 34);
+  }
+
+  const logMin = Math.floor(Math.log10(yMin));
+  const logMax = Math.ceil(Math.log10(yMax));
+
+  for (let p = logMin; p <= logMax; p++) {
+    const val = Math.pow(10, p);
+    const y = yMap(val);
+
+    ctx.beginPath();
+    ctx.moveTo(left - 8, y);
+    ctx.lineTo(left, y);
+    ctx.stroke();
+
+    ctx.fillText("1e" + p, 52, y + 7);
+
+    ctx.strokeStyle = "#eee";
+    ctx.beginPath();
+    ctx.moveTo(left, y);
+    ctx.lineTo(left + plotW, y);
+    ctx.stroke();
+    ctx.strokeStyle = "#000";
+  }
+
+  ctx.font = "26px Arial";
+  ctx.fillStyle = "#000";
+  ctx.fillText("h", left + plotW / 2, H - 24);
+
+  ctx.save();
+  ctx.translate(24, top + plotH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText("Relative error (ppm, log scale)", 0, 0);
+  ctx.restore();
+
+  ctx.font = "20px Arial";
+  ctx.fillStyle = "#000";
+  ctx.fillText(modeName, left + 10, top + 24);
+
+  ctx.strokeStyle = "#0b5ed7";
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  data.forEach((d, i) => {
+    const x = xMap(d.h);
+    const y = yMap(d.model);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = 2.2;
+  ctx.beginPath();
+  data.forEach((d, i) => {
+    const x = xMap(d.h);
+    const y = yMap(d.r2);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  const maxPoint = data.reduce((a, b) => a.model > b.model ? a : b);
+  const xM = xMap(maxPoint.h);
+  const yM = yMap(maxPoint.model);
+
+  ctx.fillStyle = "#0b5ed7";
+  ctx.beginPath();
+  ctx.arc(xM, yM, 4, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.font = "18px Arial";
+  ctx.fillStyle = "#0b5ed7";
+  ctx.fillText("R2/F3EXP", left + 20, top + 55);
+
+  ctx.fillStyle = "red";
+  ctx.fillText("Ramanujan II", left + 20, top + 82);
+
+  ctx.fillStyle = "#0b5ed7";
+  ctx.fillText(
+    "max model = " + maxPoint.model.toFixed(6) + " ppm",
+    Math.min(xM + 12, W - 300),
+    Math.max(yM - 10, 22)
+  );
+}
+
+compute();
+runBenchmarkMode();
+</script>
+
+</body>
+</html>
