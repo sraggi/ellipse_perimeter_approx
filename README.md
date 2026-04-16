@@ -19,7 +19,7 @@ Ayala-Raggi, S.E., Rendón-Marín, M. (2026)
 **Permanent Document in Zenodo (Zenodo DOI):**  https://doi.org/10.5281/zenodo.19421410
 
 <a href="https://sraggi.github.io/ellipse_perimeter_approx/demo.html" target="_blank">
-  👉 Open interactive demo 🌐
+  🌐 Open interactive demo
 </a>
 
 
@@ -130,10 +130,17 @@ $$
 * r = 9.5254540577122027e-01
 * s = 1.7028129039833189e+00
 
+**R2/F3EXP Notable features:**
 **Maximum relative error:**
+🔥  **0.055 ppm**
 
-> **0.055 ppm**
+🚀 The most accurate and compact closed-form formula available in the literature. 
 
+👉 R2/F3EXP Live demo:
+https://sraggi.github.io/ellipse_perimeter_approx/demo.html
+
+👉 Source code:
+https://github.com/sraggi/ellipse_perimeter_approx/demo.html
 ---
 
 ## 5. Flexible (with powers) Four-Exponential Model (R2/F4EXP)
