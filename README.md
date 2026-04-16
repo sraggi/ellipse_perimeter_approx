@@ -130,7 +130,7 @@ $$
 * r = 9.5254540577122027e-01
 * s = 1.7028129039833189e+00
 
-**R2/F3EXP Notable features:**
+# R2/F3EXP Notable features:
 
 ## Maximum relative error:  🔥  0.055 ppm
 
