@@ -134,7 +134,7 @@ $$
 
 **Maximum relative error:**
 
-🔥  # 0.055 ppm**
+🔥  #0.055 ppm
 
 🚀 The most accurate and compact closed-form formula available in the literature. 
 
