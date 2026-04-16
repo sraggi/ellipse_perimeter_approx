@@ -18,7 +18,10 @@ Ayala-Raggi, S.E., Rendón-Marín, M. (2026)
 
 **Permanent Document in Zenodo (Zenodo DOI):**  https://doi.org/10.5281/zenodo.19421410
 
-[🌐 Live Demo](https://sraggi.github.io/ellipse_perimeter_approx/demo.html)
+<a href="https://sraggi.github.io/ellipse_perimeter_approx/demo.html" target="_blank">
+  👉 Open interactive demo 🌐
+</a>
+
 
 ## Abstract
 
