@@ -2,6 +2,11 @@
 
 Authors:  Salvador E. Ayala-Raggi and Manuel Rendón-Marín
 
+<p align="center">
+  <img src="assets/ellipse_perimeter.png" width="500"><br>
+  <em>Figure 1. Ellipse geometry showing semi-major axis, semi-minor axis, foci, and perimeter.</em>
+</p>
+
 This repository contains the code and extended data for the paper:
 
 **An Exponential Correction to Ramanujan’s Second Formula for Ellipse Perimeter Computation**.
