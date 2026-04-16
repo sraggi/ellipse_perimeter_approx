@@ -131,8 +131,10 @@ $$
 * s = 1.7028129039833189e+00
 
 **R2/F3EXP Notable features:**
+
 **Maximum relative error:**
-🔥  **0.055 ppm**
+
+🔥  # 0.055 ppm**
 
 🚀 The most accurate and compact closed-form formula available in the literature. 
 
