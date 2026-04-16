@@ -132,12 +132,14 @@ $$
 
 ### R2/F3EXP Notable features:
 
-### 🚀 Maximum relative error:  🔥  0.055 ppm
+#### 🚀 Maximum relative error:  🔥  0.055 ppm
 
-### 🚀 The most accurate and compact closed-form formula available in the literature for calculating the perimeter of an ellipse.
+#### 🚀 The most accurate and compact closed-form formula available in the literature for calculating the perimeter of an ellipse.
 
-### 🌐 R2/F3EXP Live demo:
-### https://sraggi.github.io/ellipse_perimeter_approx/demo.html
+#### 🌐 R2/F3EXP Live demo:
+#### https://sraggi.github.io/ellipse_perimeter_approx/demo.html
+
+
 
 
 ## 5. Flexible (with powers) Four-Exponential Model (R2/F4EXP)
