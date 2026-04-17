@@ -3,7 +3,7 @@
 Authors:  Salvador E. Ayala-Raggi and Manuel Rendón-Marín
 
 <p align="center">
-  <img src="/ellipse_perimeter_approx/ellipse_perimeter1.png" width="400"><br>
+  <img src="ellipse_perimeter1.png" width="400"><br>
   <em>Figure 1. Ellipse geometry showing semi-major axis, semi-minor axis, foci, and perimeter.</em>
 </p>
 
