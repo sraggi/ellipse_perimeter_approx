@@ -27,7 +27,7 @@ Ayala-Raggi, S.E., Rendón-Marín, M. (2026)
   🌐 Open interactive demo
 </a>
 
-GitHub page:
+### GitHub page:
 
 https://sraggi.github.io/ellipse_perimeter_approx/
 
