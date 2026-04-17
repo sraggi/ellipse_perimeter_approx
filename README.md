@@ -21,6 +21,10 @@ Ayala-Raggi, S.E., Rendón-Marín, M. (2026)
 
 **Full Document in ResearchGate (NEW):** https://www.researchgate.net/publication/403504375_Exponential_Corrections_to_Ramanujan's_Second_Formula_for_the_Ellipse_Perimeter_A_set_of_ultra-accurate_closed-form_formulas
 
+<a href="https://www.researchgate.net/publication/403504375_Exponential_Corrections_to_Ramanujan's_Second_Formula_for_the_Ellipse_Perimeter_A_set_of_ultra-accurate_closed-form_formulas" target="_blank">
+  View on ResearchGate
+</a>
+
 **Permanent Document in Zenodo (Zenodo DOI):**  https://doi.org/10.5281/zenodo.19421410
 
 #### Interactive ellipse perimeter calculator using R2/F3EXP:
