@@ -1,4 +1,4 @@
-# Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter: ultra-accurate closed-form formulas
+# Exponential Corrections to Ramanujan’s Second Formula for the Ellipse Perimeter: Ultra-Accurate Closed-Form Formulas
 
 Authors:  Salvador E. Ayala-Raggi and Manuel Rendón-Marín
 
